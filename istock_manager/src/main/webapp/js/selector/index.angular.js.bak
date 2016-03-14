@@ -1,0 +1,48 @@
+/**
+ * Created by gonghongrui on 14/12/2.
+ */
+
+var module_index = angular.module('index', ['ngResource','StockSelectorService'], angular.noop);
+//StockGridCtrl SelectorDetailCtrl
+function SelectorDetailCtrl($scope) {
+
+    $scope.specifications = [
+        {"code":"zhangdiezhi","name":"涨跌值"}
+        ,{"code":"liangbi","name":"量比"}
+    ];
+
+    $scope.compareTypes = [{
+        "code":"equal","name":"等于"}
+        ,{"code":"more","name":"大于"}
+        ,{"code":"less","name":"小于"}
+        ,{"code":"moreEqual","name":"大于或等于"}
+        ,{"code":"lessEqual","name":"小于或等于"}
+    ];
+
+
+    $scope.calTypes = [
+        {"code":"average","name":"平均"}
+        ,{"code":"total","name":"总共"}
+        ,{"code":"single","name":"每天"}
+    ];
+
+    $scope.selectedSpecification = 'zhangdiezhi';
+
+    $scope.stockselector ={"condition":{"period":1,"name":"测试","rules":[{"specification":"liangbi","calType":"total","compareType":"moreEqual"}]}};
+
+    $scope.addRule = function(){
+
+        $scope.stockselector.condition.rules.push({"specification":$scope.selectedSpecification,"calType":"total","compareType":"more"});
+    }
+    $scope.removeRule = function(index){
+        $scope.stockselector.condition.rules.splice(index,1)
+    }
+
+}
+
+function SelectorGridCtrl($scope, StockSelector) {
+    StockSelectorService.query()
+}
+
+module_index.controller('SelectorDetailCtrl', ['$scope',SelectorDetailCtrl]);
+module_index.controller('SelectorGridCtrl', ['$scope','StockSelector',SelectorGridCtrl]);

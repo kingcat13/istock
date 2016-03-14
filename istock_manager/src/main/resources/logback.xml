@@ -1,0 +1,58 @@
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+	<property name="appDestination" value="../logs" />
+    <property name="appName" value="istock" />
+	
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${appDestination}/${appName}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${appDestination}/${appName}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<MaxHistory>60</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-  %msg    [%logger{36}]%n </pattern>
+		</encoder>
+	</appender>
+
+    <appender name="zookeeper"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${appDestination}/${appName}_zookeeper.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${appDestination}/${appName}_zookeeper-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxHistory>60</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-  %msg    [%logger{36}]%n </pattern>
+        </encoder>
+    </appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+    <logger name="com.kingzoo.kingcat.framework.zookeeper" level="ALL" >
+        <appender name="zookeeper"/>
+    </logger>
+
+
+	<root level="debug">
+		<appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT"/>
+	</root>
+</configuration>

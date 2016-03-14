@@ -1,0 +1,8 @@
+package com.kingzoo.kingcat.project.istock.core.dataday.dao;
+
+import com.kingzoo.kingcat.framework.common.dao.Dao;
+import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataLatest;
+
+public interface IStockDataLatestDao extends Dao<StockDataLatest> {
+	
+}

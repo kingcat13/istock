@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Zirtual is a virtual executive assistant service that matches
+                   busy people with dedicated personal assistants.">
+    <meta name="author" content="Zirtual">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>
+        涨高高 &middot;
+        Stock Virtual Assistants for Busy People.
+
+    </title>
+
+    <!-- Core CSS -->
+    <!--<link href="https://zirtual-static-east.s3.amazonaws.com/website_v2/css/zirtual-base.css?v=2" rel="stylesheet">-->
+    <!--<link href="v2/css/base.css" rel="stylesheet">-->
+    <link href="lib/bootstrap_3_3/css/bootstrap.css" rel="stylesheet">
+    <link href="css/test.css" rel="stylesheet">
+
+
+    <!--<script src="https://zirtual-static-east.s3.amazonaws.com/website_v2/js/third-party-js/modernizr.custom.js"></script>-->
+
+    <!--<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UQEHWV5VGwEFXFZWAgY="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(4),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(u){"stack"in u&&(t(5),t(3),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:4,2:7,3:5,4:18,5:6,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:18,2:19,ee:"QJf3ax",gos:"7eSDFh"}],5:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:19,2:18,ee:"QJf3ax"}],6:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:19,2:18,ee:"QJf3ax"}],7:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),u=s(a),f=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new f(t);try{i.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=f.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:4,2:19,ee:"QJf3ax"}],8:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=e(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var f=0;c>f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:9,3:7,4:4,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],9:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,u="addEventListener",f="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[u]?(c[u]("DOMContentLoaded",o,!1),s[u]("load",n,!1)):(c[f]("onreadystatechange",r),s[f]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],18:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],19:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:18,ee:"QJf3ax"}]},{},["G9z0Bl",3,8]);</script></head>-->
+
+<body data-spy="scroll" data-target="#scrollspy">
+
+<div class="container-full">
+    <!-- Global navigation scheme(s)
+    ================================================== -->
+
+    <!--/.navbar-transparent -->
+    <header class='navbar-slide'>
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button"
+                            class="navbar-toggle"
+                            data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/"
+                       class="navbar-brand">
+                        zirtual
+                    </a>
+                </div>
+                <!--/.navbar-header -->
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/what-we-do/">
+                                What We Do
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/why-zirtual/">
+                                Why Zirtual?
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown">
+                                More <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/zirtual-assistants/">
+                                        Our Assistants
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/client-success-stories/">
+                                        Our Success Stories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/core-values/">
+                                        Our Core Values
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/expectations/">
+                                        What to Expect
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/faqs/">
+                                        FAQs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/zirtual-plus/">
+                                        Zirtual +Plus Partners
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/jobs/">
+                                        <span class="label label-success">Jobs</span>
+                                        Work at Zirtual
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="phone">
+                            <abbr title="Phone">
+                                P:
+                            </abbr>
+                            (800) 997-9714
+                        </li>
+                        <li>
+                            <a href="/plans-pricing/"
+                               class="btn btn-navbar-slide-plans">
+                                Plans &amp; Pricing
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container -->
+        </div>
+        <!--/.navbar-default -->
+    </header>
+    <!--/.navbar-slide -->
+
+    <div class="hero">
+        <div class="landing">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8" align="center">
+                            <div class="spacer-hero"></div>
+                            <h1>
+                                工作. 家庭. 已兼顾.
+                            </h1>
+
+                            <p>
+                                Dedicated Virtual Assistants for Entrepreneurs,
+                                <br>
+                                Professionals, and Small Teams
+                            </p>
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-2"></div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="spacer-play"></div>
+                            <a href="#learn-more"
+                               id="anchor2"
+                               class="anchorLink btn btn-lg btn-success">
+                                Learn More
+                            </a>
+                            <em style="color:#b0babf;">or</em>
+                            <a href="/client-success-stories/#videos"
+                               class="btn btn-lg btn-white">
+                                More Videos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.wrapper -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.landing -->
+    </div>
+    <!-- /.hero -->
+    <div class="light border">
+        <div class="cushion inner-border">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a name="learn-more" id="learn-more" class="nav-offset"></a>
+                        <h4 class="increased-height text-muted">
+                            Zirtual Assistants are used by busy people from amazing companies
+                            all over the world.
+                        </h4>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <div id="carousel" class="carousel slide">
+                            <!-- Indicators -->
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="img/logo-use-one.png">
+                                </div>
+
+
+                            </div>
+                            <!-- /.carousel-inner -->
+                        </div>
+                        <!-- /.carousel -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.cushion -->
+    </div>
+    <!-- /.light -->
+    <div class="white">
+        <div class="col-md-6">
+            <div class="cushion pad-left">
+                <h1>
+                    Streamline your success, in work and life.
+                </h1>
+
+                <p>
+                    Zirtual is the secret weapon of successful people. Not just in work,
+                    but in life. We give you more time to focus on the big picture by
+                    taking care of the little details. Stuff like scheduling meetings,
+                    paying bills, and booking travel. As a Zirtual client, you get your
+                    very own Zirtual Assistant (ZA) &mdash; a smart, college-educated U.S.
+                    based point person who works remotely as your right hand and left
+                    brain. You delegate a task and your ZA is on it.
+                </p>
+
+                <div class="divider-lg">
+                </div>
+                <p>
+                    <strong>
+                        Bills? Paid. Inbox? Cleared. Travel? Booked.
+                    </strong>
+                    <a href="/what-we-do/" class="more">
+                        Learn more
+                    </a>
+                </p>
+            </div>
+            <!-- /.cushion-lg -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-offset-6">
+            <img src="img/panel-joanna.png"
+                 class="img-responsive"
+                 style="margin-top:-30px;"/>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.white -->
+
+
+    <div class="light">
+        <div class="cushion">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <h1>Don't just take our word for it,
+                            <small><em>see what others are saying.</em></small>
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row small">
+                    <div class="col-md-4">
+                        <div class="testimonial">
+                            <div class="headshot">
+                                <img src="img/testimonial-leigh-gallagher.jpg"
+                                     width="75"
+                                     height="75">
+                            </div>
+                            <!-- /.headshot -->
+                            <div class="quote">
+                                <p>
+
+                                    I don't know how I ever managed without Samantha. No task is too complicated
+                                    and she approaches everything with the sunniest, most helpful of attitudes.
+                                    I would be lost without her!
+
+                                </p>
+
+                                <div class="name">
+
+                                    Leigh Gallagher
+
+                                </div>
+                                <div class="divider"></div>
+                                <p class="small">
+
+                                    <em>Editor,</em>
+                                    <a href="http://money.cnn.com/magazines/fortune/"
+                                       target="_blank">
+                                        <strong>Fortune Magazine</strong>
+                                    </a>
+
+                                </p>
+                            </div>
+                            <!-- /.quote -->
+                        </div>
+                        <!-- /.testimonial -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                        <div class="testimonial">
+                            <div class="headshot">
+                                <img src="img/testimonial-ben-parr.jpg"
+                                     width="75"
+                                     height="75">
+                            </div>
+                            <!-- /.headshot -->
+                            <div class="quote">
+                                <p>
+
+                                    My ZA is the guardian of my most important asset, my time, and has helped me
+                                    save hundreds of hours that now go into my business. You need to get your
+                                    head checked if you don't get a ZA.
+
+                                </p>
+
+                                <div class="name">
+
+                                    Ben Parr
+
+                                </div>
+                                <div class="divider"></div>
+                                <p class="small">
+
+                                    <em>Co-founder,</em>
+                                    <a href="http://www.dominatefund.com/"
+                                       target="_blank">
+                                        <strong>Dominate Fund</strong>
+                                    </a>
+
+                                </p>
+                            </div>
+                            <!-- /.quote -->
+                        </div>
+                        <!-- /.testimonial -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                        <div class="testimonial">
+                            <div class="headshot">
+                                <img src="img/testimonial-matt-wyndowe.jpg"
+                                     width="75"
+                                     height="75">
+                            </div>
+                            <!-- /.headshot -->
+                            <div class="quote">
+                                <p>
+
+                                    I surreptitiously emailed Kelsey with an impossible task. Well... to my
+                                    amazement, she did it. The job now hangs proudly on our conference room wall
+                                    and the team absolutely loved it.
+
+                                </p>
+
+                                <div class="name">
+
+                                    Matt Wyndowe
+
+                                </div>
+                                <div class="divider"></div>
+                                <p class="small">
+
+                                    <em>Product Manager, Identity Growth,</em>
+                                    <a href="http://facebook.com/"
+                                       target="_blank">
+                                        <strong>Facebook</strong>
+                                    </a>
+
+                                </p>
+                            </div>
+                            <!-- /.quote -->
+                        </div>
+                        <!-- /.testimonial -->
+                    </div>
+                    <!-- /.col -->
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.cushion -->
+    </div>
+    <!-- /.light -->
+
+    <div class="white">
+        <div class="col-md-6">
+            <img src="img/panel-axel.png"
+                 class="img-responsive"
+                 style="margin-top:-30px;"
+                 align="right">
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+            <div class="cushion pad-right">
+                <h1>
+                    Some call them superhuman, we call them ZAs.
+                </h1>
+
+                <p>
+                    At Zirtual, we hire U.S. based, detail-oriented people who strive to
+                    provide our clients with the best assistance on the planet. All
+                    Zirtual Assistants go through a rigorous, multi-step vetting process
+                    that tests everything from their communication and tech skills to
+                    their creativity and resourcefulness. Thousands apply, but only the
+                    best of the best get to call themselves
+                    <abbr title="Zirtual Assistants">ZAs</abbr>.
+                </p>
+
+                <div class="divider-lg"></div>
+                <p>
+                    <strong>
+                        Smart, reliable, personable virtual assistants.
+                    </strong>
+                    <a href="/zirtual-assistants/" class="more">
+                        Learn more
+                    </a>
+                </p>
+            </div>
+            <!-- /.cushion -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.white -->
+
+    <div class="light border">
+        <div class="cushion inner-border">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>
+                            Get a dedicated Zirtual Assistant for just a fraction of what an
+                            in-office EA would cost!
+                        </h1>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-5">
+                        <br>
+
+                        <p class="text-muted">
+                            By harnessing the power of collaborative consumption you can get
+                            all of the access with none of the overhead.
+                        </p>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.cushion -->
+    </div>
+    <!-- /.light -->
+    <div class="white">
+        <div class="col-md-6">
+            <div class="cushion-lg pad-left">
+                <div class="spacer"></div>
+                <h1>
+                    Give us your to-do list and get on with your love-to-do list.
+                </h1>
+
+                <p>
+                    Get started by having your ZA set up meetings, manage your busy
+                    schedule and streamline all the information that pours into your
+                    inbox. They can help remind you of that important call, deal with the
+                    phone company, track your packages and plan your weekend getaway.
+                </p>
+
+                <div class="divider-lg"></div>
+                <p>
+                    <strong>
+                        With your ZA handling all the small stuff, you can start focusing on
+                        what's truly important, in work and life.
+                    </strong>
+                </p>
+            </div>
+            <!-- /.cushion-lg -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-offset-6">
+            <img src="img/asset-iphone-hand-cropped.png"
+                 class="img-responsive pull-right"
+                 style="margin-top:-70px;">
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.white -->
+
+
+    <div class="light">
+        <div class="cushion">
+            <div class="container">
+
+                <div class="row small">
+                    <div class="col-md-4">
+                        <div class="testimonial">
+                            <div class="headshot">
+                                <img src="img/testimonial-ruth-ann.jpg"
+                                     width="75"
+                                     height="75">
+                            </div>
+                            <!-- /.headshot -->
+                            <div class="quote">
+                                <p>
+
+                                    Zirtual got top marks from several colleagues, but my prior effort working
+                                    with a virtual assistant was not satisfactory. Surprise! I was so happy with
+                                    my ZA that I soon added two co-workers to my plan.
+
+                                </p>
+
+                                <div class="name">
+
+                                    Ruth Ann
+
+                                </div>
+                                <div class="divider"></div>
+                                <p class="small">
+
+                                    <em>President,</em>
+                                    <a href="http://thehf.org/"
+                                       target="_blank">
+                                        <strong>The Harnisch Foundation</strong>
+                                    </a>
+
+                                </p>
+                            </div>
+                            <!-- /.quote -->
+                        </div>
+                        <!-- /.testimonial -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                        <div class="testimonial">
+                            <div class="headshot">
+                                <img src="img/testimonial-prabhakar-gopalan.jpg"
+                                     width="75"
+                                     height="75">
+                            </div>
+                            <!-- /.headshot -->
+                            <div class="quote">
+                                <p>
+
+                                    As a tech entrepreneur and father of two young kids, I have more things to
+                                    do everyday than I possibly can. My ZA, Molly, takes care of many day-to-day
+                                    tasks and helps make my life manageable.
+
+                                </p>
+
+                                <div class="name">
+
+                                    Prabhakar Gopalan
+
+                                </div>
+                                <div class="divider"></div>
+                                <p class="small">
+
+                                    <em>VP of Products,</em>
+                                    <a href="http://khorus.com/"
+                                       target="_blank">
+                                        <strong>Khorus</strong>
+                                    </a>
+
+                                </p>
+                            </div>
+                            <!-- /.quote -->
+                        </div>
+                        <!-- /.testimonial -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                        <div class="testimonial">
+                            <div class="headshot">
+                                <img src="img/testimonial-jenny-blake.jpg"
+                                     width="75"
+                                     height="75">
+                            </div>
+                            <!-- /.headshot -->
+                            <div class="quote">
+                                <p>
+
+                                    I cannot recommend Zirtual enough to businesses large and small, and even
+                                    individuals who are looking to free up time in a significant way. And who
+                                    amongst us doesn't want a little more free time?
+
+                                </p>
+
+                                <div class="name">
+
+                                    Jenny Blake
+
+                                </div>
+                                <div class="divider"></div>
+                                <p class="small">
+
+                                    <em>Author, Speaker and Coach,</em>
+                                    <a href="http://jennyblake.me/"
+                                       target="_blank">
+                                        <strong>JennyBlake.me</strong>
+                                    </a>
+
+                                </p>
+                            </div>
+                            <!-- /.quote -->
+                        </div>
+                        <!-- /.testimonial -->
+                    </div>
+                    <!-- /.col -->
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.cushion -->
+    </div>
+    <!-- /.light -->
+
+    <div class="dark border">
+        <div class="cushion inner-border">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <h1>Are you ready to supercharge your productivity?</h1>
+
+                        <p>Handing off your time-sinking tasks to a ZA so you can be more focused is a great way to
+                            start.</p>
+                        <br>
+                        <a href="/plans-pricing/">
+                            <button class="btn btn-dark btn-lg" type="button">See Our Plans &amp; Pricing</button>
+                        </a>
+
+                        <div class="spacer"></div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.cushion -->
+    </div>
+    <!-- /.dark -->
+
+
+    <!-- Global footer elements and navigation
+    ================================================== -->
+
+    <footer>
+        <div class="midnight">
+            <div class="cushion-lg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h4>
+                                About Zirtual
+                            </h4>
+
+                            <div class="divider"></div>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/our-story/">
+                                        Our Story
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/zirtual-assistants/">
+                                        Our Assistants
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/client-success-stories/">
+                                        Our Client Success Stories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/zirtual-plus/">
+                                        Our Partner Network
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/epic-guarantee/">
+                                        Our Epic Guarantee
+                                    </a>
+                                </li>
+                            </ul>
+                            <br>
+                            <h4>
+                                Company
+                            </h4>
+
+                            <div class="divider"></div>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/faqs/">
+                                        FAQs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/press/">
+                                        Press
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/referrals/">
+                                        Refer &amp; Earn
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col 1 -->
+                        <div class="col-md-3">
+                            <h4>
+                                Get To Know Us
+                            </h4>
+
+                            <div class="divider"></div>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="https://twitter.com/Zirtual"
+                                       target="_blank">
+                                        Twitter
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/zirtual"
+                                       target="_blank">
+                                        Facebook
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://plus.google.com/+Zirtual/"
+                                       rel="publisher"
+                                       target="_blank">
+                                        Google+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://www.linkedin.com/company/zirtual"
+                                       target="_blank">
+                                        LinkedIn
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://blog.zirtual.com">
+                                        Read Our Blog
+                                    </a>
+                                </li>
+                            </ul>
+                            <br>
+                            <h4>
+                                Policies
+                            </h4>
+
+                            <div class="divider"></div>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/terms-of-service/">
+                                        Terms of Service
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/privacy-policy/">
+                                        Privacy Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/security/">
+                                        Security
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col 2 -->
+                        <div class="col-md-3">
+                            <h4>
+                                Connect With Us
+                            </h4>
+
+                            <div class="divider"></div>
+                            <address>
+                                <strong>
+                                    Client Happiness Team
+                                </strong>
+                                <br>
+                                <abbr title="Phone">P:</abbr>
+                                (800) 997-9714
+                                <br>
+                                <a href="mailto:happiness@zirtual.com">
+                                    happiness@zirtual.com
+                                </a>
+                            </address>
+                            <div class="divider"></div>
+                            <p>
+                                <strong>
+                                    Passionately built in:
+                                </strong>
+                                <br>
+                                SF
+                                <img src="img/glyphicons/glyphicons_019_heart_empty.png"
+                                     width="12"
+                                     height="11">
+                                Las Vegas
+                                <img src="img/glyphicons/glyphicons_019_heart_empty.png"
+                                     width="12"
+                                     height="11">
+                                NYC
+                            </p>
+
+                            <p>
+                                Zirtual Assistants are hired and certified in the U.S., but
+                                happily available to everyone, everywhere.
+                            </p>
+                        </div>
+                        <!-- /.col 3 -->
+                        <div class="col-md-3">
+                            <h4>
+                                Work At Zirtual
+                            </h4>
+
+                            <div class="divider"></div>
+                            <p>
+                                At Zirtual we are a passionate group of people dedicated to
+                                making lasting relationships and building new technologies that
+                                improve people's lives. We're always looking for talented
+                                individuals to join our team.
+                            </p>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <span class="label label-success">Jobs</span>
+                                    <a href="/jobs/">
+                                        See Our Current Job Listings
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="fb-root"></div>
+
+                            <p>
+
+                            <div class="fb-like"
+                                 data-href="http://facebook.com/zirtual"
+                                 data-layout="button_count"
+                                 data-action="like"
+                                 data-show-faces="false"
+                                 data-share="true"></div>
+                            <div class="twitter-offset">
+                                <a href="https://twitter.com/zirtual"
+                                   class="twitter-follow-button"
+                                   data-show-count="false"
+                                   data-lang="en">
+                                    Follow @zirtual
+                                </a>
+                            </div>
+
+                            </p>
+                        </div>
+                        <!-- /.col 4 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /.cushion-lg -->
+        </div>
+        <!-- /.midnight -->
+    </footer>
+    <!-- /.white -->
+
+
+
+
+
+    <script src="lib/jquery-1.11.1/jquery.min.js"></script>
+    <script src="lib/bootstrap_3_3/js/bootstrap.min.js"></script>
+    <script src="v2/js/nav-index.js"></script>
+    <!--<script src="https://zirtual-static-east.s3.amazonaws.com/website_v2/js/hybrid-js/zirtual-plus-grid.js"></script>-->
+
+
+    <!--<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"applicationTime":78,"agent":"js-agent.newrelic.com/nr-476.min.js","queueTime":4,"beacon":"beacon-6.newrelic.com","licenseKey":"f705cec273","transactionName":"YFRVbEAFCEUAUEZbXVkecU1cBxJfDl0dSFYZRlJaQQ0SUz5FABxEXlRASwgNCFIESw==","errorBeacon":"bam.nr-data.net","applicationID":"2587457"}</script></body>-->
+</html>

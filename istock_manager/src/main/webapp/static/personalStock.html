@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../resources/image/favicon.ico">
+
+    <title>涨高高</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap_3_3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../lib/bootstrap_3_3/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../index.css" rel="stylesheet">
+    <link href="../lib/typeahead-0.10.5/typeahead.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+</head>
+
+<body role="document">
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="#"  ><span class="label label-danger">涨高高</span></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="float: right">
+                <li ><a href="../index.html">Home</a></li>
+                <li class="active"><a href="#">自选股</a></li>
+                <li><a href="#contact">涨势如虹</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">蓄势待发</a></li>
+                        <li><a href="#">摇摇欲坠</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+
+</nav>
+
+<div class="container " >
+    <div class="row">
+        <span class="label label-white">自选股:</span>
+        <input type="text" class="typeahead tt-input" style="background-color: #333;color: #ffffff;" placeholder="请输入股票代码/简拼"/>
+
+        <button type="button" class="btn btn-sm btn-default">Search</button>
+
+    </div>
+    <div class="row col-md-12">
+        <table class="table">
+            <thead>
+            <tr style="color: #808080">
+                <th>证券代码</th>
+                <th>证券名称</th>
+                <th>收盘价</th>
+                <th>涨跌幅%</th>
+                <th>涨跌值</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="color: #F74016">
+                <td style="color: #ffff00">600026</td>
+                <td style="color: #ffff00">中海发展</td>
+                <td>6.18</td>
+                <td>0.32</td>
+                <td>0.02</td>
+            </tr>
+            <tr style="color: #64FF2C">
+                <td style="color: #ffff00">600027</td>
+                <td style="color: #ffff00">华电国际</td>
+                <td>4.47</td>
+                <td>-2.19</td>
+                <td>0.10</td>
+            </tr>
+            <tr>
+                <td colspan="12">
+
+                    <ul  class="pagination pagination-sm ">
+                        <li><a href="#" style="background-color: #333">上一页</a></li>
+                        <li><a href="#" >1</a></li>
+                        <li><a href="#" style="background-color: #333">2</a></li>
+                        <li><a href="#" style="background-color: #333">3</a></li>
+                        <li><a href="#" style="background-color: #333">4</a></li>
+                        <li><a href="#" style="background-color: #333">5</a></li>
+                        <li><a href="#" style="background-color: #333">下一页</a></li>
+                    </ul>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+<!-- /container -->
+<div class="container" >
+    <div id="container" style="min-width:700px;height:400px;"></div>
+</div>
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="../lib/bootstrap_3_3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highstock/2.0.3/highstock.js"></script>
+<!--<script type="text/javascript" src="resources/Highstock-2.0.3/js/themes/gray.js"></script>-->
+<script src="../lib/typeahead-0.10.5/typeahead.bundle.js"></script>
+<script>
+    var path = "../lib/Highstock-2.0.3/candlestick-and-volume.json";
+    $(function() {
+        $.getJSON(path, function(result) {
+            var data = result.data;
+            // split the data set into ohlc and volume
+            var ohlc = [],
+                    volume = [],
+                    dataLength = data.length;
+
+            for (i = 0; i < dataLength; i++) {
+                ohlc.push([
+                    data[i][0], // the date
+                    data[i][1], // open
+                    data[i][2], // high
+                    data[i][3], // low
+                    data[i][4] // close
+                ]);
+
+                volume.push([
+                    data[i][0], // the date
+                    data[i][5] // the volume
+                ])
+            }
+
+            // set the allowed units for data grouping
+            var groupingUnits = [[
+                'week',                         // unit name
+                [1]                             // allowed multiples
+            ], [
+                'month',
+                [1]
+            ]];
+            Highcharts.setOptions({
+                lang: {
+                    rangeSelectorZoom: '范围'
+                }
+            });
+            // create the chart
+            $('#container').highcharts('StockChart', {
+                chart:{
+//                    borderColor:'#ff0000',
+//                    plotBorderColor:'#ff0000'
+                },
+                rangeSelector: {
+                    selected: 1,
+                    enabled:true,
+                    inputEnabled:false,
+                    buttons: [{
+                        type: 'month',
+                        count: 1,
+                        text: '1个月'
+                    }, {
+                        type: 'month',
+                        count: 3,
+                        text: '3个月'
+                    }, {
+                        type: 'month',
+                        count: 6,
+                        text: '6个月'
+                    }, {
+                        type: 'year',
+                        count: 1,
+                        text: '1年'
+                    }, {
+                        type: 'all',
+                        text: '全部'
+                    }]
+                },plotOptions: {
+                    candlestick: {
+                        upColor:'#F74016',
+                        color:'#64FF2C'
+                    }
+                },
+                title: {
+                    text: '苹果'
+                },
+
+                yAxis: [{
+                    title: {
+                        //text: 'OHLC'
+                    },
+                    height: 200,
+                    lineWidth: 2
+                }, {
+                    title: {
+                        //text: 'Volume'
+                    },
+                    top: 300,
+                    height: 100,
+                    offset: 0,
+                    lineWidth: 2
+                }],
+
+                series: [{
+                    type: 'candlestick',
+                    name: '苹果',
+                    data: ohlc,
+                    dataGrouping: {
+                        units: groupingUnits
+                    }
+                }, {
+                    type: 'column',
+                    name: '成交量',
+                    data: volume,
+                    yAxis: 1,
+                    dataGrouping: {
+                        units: groupingUnits
+                    }
+                }]
+            });
+        });
+    });
+</script>
+</body>
+</html>
