@@ -12,10 +12,6 @@
     <name>iStock</name>
 
     <modules>
-        <module>../istock_core</module>
-        <module>../istock_analyzer</module>
-        <module>../istock_manager</module>
-        <module>../istock_dataGetter</module>
     </modules>
 
     <properties>
