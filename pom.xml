@@ -12,7 +12,7 @@
     <name>iStock</name>
 
     <modules>
-
+        <module>istock_manager</module>
     </modules>
 
     <properties>
