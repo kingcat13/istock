@@ -44,7 +44,8 @@
     </dependencies>
 
     <build>
-        <finalName>istock</finalName>
+        <finalName>istock_m</finalName>
+
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
