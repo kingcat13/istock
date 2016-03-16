@@ -2,8 +2,8 @@
  * Created by gonghongrui on 14/12/2.
  */
 
-//var stockColorStyle = {"up": "#F74016", "down": "#64FF2C"};
-var stockColorStyle = {"up": "black", "down": "black"};
+var stockColorStyle = {"up": "#F74016", "down": "#64FF2C"};
+//var stockColorStyle = {"up": "black", "down": "black"};
 
 var module_index = angular.module('index', ['ngResource','StockDataDayLatestService'], angular.noop);
 //StockGridCtrl StockSelectorController
