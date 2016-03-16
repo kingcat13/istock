@@ -7,9 +7,9 @@
 
 
 
-	<mongo:mongo host="10.0.20.89" port="27017"/>
+	<mongo:mongo host="${mongo.host}" port="${mongo.port}"/>
 
-	<mongo:db-factory dbname="istock" mongo-ref="mongo"/>
+	<mongo:db-factory dbname="${mongo.dbname}" mongo-ref="mongo"/>
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>

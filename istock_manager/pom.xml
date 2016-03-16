@@ -43,14 +43,50 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>environment.type</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <build>
+                <filters>
+                    <filter>filters/dev.properties</filter>
+                </filters>
+            </build>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>environment.type</name>
+                    <value>production</value>
+                </property>
+            </activation>
+            <build>
+                <filters>
+                    <filter>filters/production.properties</filter>
+                </filters>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <finalName>istock</finalName>
+
+
 
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
             </resource>
         </resources>
         <testResources>
