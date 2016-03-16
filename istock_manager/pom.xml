@@ -79,8 +79,6 @@
     <build>
         <finalName>istock</finalName>
 
-
-
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
