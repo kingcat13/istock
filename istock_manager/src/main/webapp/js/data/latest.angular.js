@@ -30,7 +30,6 @@ function StockDataDayLatestController($scope, stockDataDayLatestService) {
     }
 
 
-
 }
 
 
