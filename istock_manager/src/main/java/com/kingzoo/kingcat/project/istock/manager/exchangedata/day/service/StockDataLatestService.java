@@ -167,16 +167,11 @@ public class StockDataLatestService {
 		 */
 		String date = DateFormatUtils.ISO_DATE_FORMAT.format(Calendar.getInstance());
 
-		long count = stockDataLatestDao.count();
+		long count = stockDataLatestDao.countLatestData(date);
 
 		if(count==0){
 			notificationService.sendToOne("kingcat", date+" 数据未下载", date+" 的数据未下载, 请及时下载");
 		}
 
-
 	}
-
-	
-
-
 }

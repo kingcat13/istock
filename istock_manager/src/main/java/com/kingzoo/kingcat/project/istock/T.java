@@ -6,6 +6,7 @@ import java.io.*;
  * Created by gonghongrui on 15/9/8.
  */
 public class T {
+
     public static void main(String[] args) throws IOException {
         FileInputStream f = new FileInputStream("/Users/gonghongrui/Desktop/a.csv");
 //        InputStreamReader f=new InputStreamReader(new FileInputStream("/Users/gonghongrui/Desktop/aa.csv"),"utf-8");
@@ -26,7 +27,5 @@ public class T {
         }
         bw.flush();
         bw.close();
-
-
     }
 }

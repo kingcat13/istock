@@ -25,7 +25,6 @@ public class JPushUtils {
 
         JPushClient jpushClient = new JPushClient(masterSecret, appKey);
 
-
         IosAlert alert = IosAlert.newBuilder()
                 .setTitleAndBody(title, message)
                 .setActionLocKey("PLAY")
