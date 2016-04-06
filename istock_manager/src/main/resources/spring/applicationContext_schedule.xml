@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--检查每天的数据是否下载了-->
+				<ref bean="stockDataLatestTrigger"/>
+			</list>
+		</property>
+		<property name="autoStartup" value="true"/>
+	</bean>
+
+	<!--检查每天的数据是否下载的定时器-->
+	<bean id="stockDataLatestTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="stockDataLatestJobDetail"/>
+		<property name="cronExpression" value="0 30 15 ? * MON-FRI "/><!-- 从周一到周五每天下午的15点30分触发 -->
+	</bean>
+	<bean id="stockDataLatestJobDetail"
+	      class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="stockDataLatestService"/>
+		<property name="targetMethod" value="checkLatestData"/>
+		<property name="concurrent" value="false"/>
+		<!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+	</bean>
+
+</beans>

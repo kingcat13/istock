@@ -7,8 +7,10 @@ import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataDay;
 import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataLatest;
 import com.kingzoo.kingcat.project.istock.core.stock.domain.Stock;
 import com.kingzoo.kingcat.project.istock.core.stock.service.StockService;
+import com.kingzoo.kingcat.project.istock.notification.service.NotificationService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +41,10 @@ public class StockDataLatestService {
 	@Autowired
 	@Qualifier(value="stockService")
 	private StockService stockService;
+
+
+	@Autowired
+	private NotificationService notificationService;
 	
 	@Transactional
 	public void add(StockDataLatest stockDataLatest){
@@ -147,6 +154,28 @@ public class StockDataLatestService {
 
 		return stockDataLatest;
 	}
+
+	/**
+	 * 判断当天的股票处理数据是否已经下载完成
+	 * @return
+     */
+	public void checkLatestData(){
+
+		/*
+		 * 1.判断当天的是否有下载数据
+		 * 2.如果没有下载数据, 则发推送消息, 提示管理员下载数据
+		 */
+		String date = DateFormatUtils.ISO_DATE_FORMAT.format(Calendar.getInstance());
+
+		long count = stockDataLatestDao.count();
+
+		if(count==0){
+			notificationService.sendToOne("kingcat", date+" 数据未下载", date+" 的数据未下载, 请及时下载");
+		}
+
+
+	}
+
 	
 
 
