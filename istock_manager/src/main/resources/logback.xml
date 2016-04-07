@@ -1,6 +1,6 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
-	<property name="appDestination" value="../logs" />
+	<property name="appDestination" value="${log.appDestination}" />
     <property name="appName" value="istock" />
 	
 	<appender name="FILE"
@@ -45,11 +45,32 @@
 		</encoder>
 	</appender>
 
+	<!-- LATEST_DATA_INFO -->
+	<appender name="LATEST_DAY_DATA_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${appDestination}/${appName}_latest_day_data.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${appDestination}/%d{yyyy-MM-dd}/${appName}_latest_day_data-%d{yyyy-MM-dd}.gz</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>1024MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
 
     <logger name="com.kingzoo.kingcat.framework.zookeeper" level="ALL" >
         <appender name="zookeeper"/>
     </logger>
 
+	<!--所有请求-->
+	<logger name="com.kingzoo.kingcat.project.istock.manager.exchangedata.day.latest" additivity="TRUE">
+		<level value="INFO"/>
+		<appender-ref ref="LATEST_DAY_DATA_LOG"/>
+	</logger>
 
 	<root level="debug">
 		<appender-ref ref="FILE" />

@@ -1,5 +1,7 @@
 package com.kingzoo.kingcat.project.istock.manager.exchangedata.day.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kingzoo.kingcat.framework.common.search.SortCondition;
 import com.kingzoo.kingcat.project.istock.core.dataday.dao.IStockDataDayDao;
 import com.kingzoo.kingcat.project.istock.core.dataday.dao.IStockDataLatestDao;
@@ -28,6 +30,7 @@ import java.util.List;
 public class StockDataLatestService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(StockDataLatestService.class);
+	private static final Logger LATEST_DAY_DATA_LOGGER = LoggerFactory.getLogger("com.kingzoo.kingcat.project.istock.manager.exchangedata.day.latest");
 	
 	@Autowired
 	@Qualifier(value="stockDataLatestDao")
@@ -45,9 +48,20 @@ public class StockDataLatestService {
 
 	@Autowired
 	private NotificationService notificationService;
+
+
+	ObjectMapper mapper = new ObjectMapper();
+
 	
 	@Transactional
 	public void add(StockDataLatest stockDataLatest){
+
+		//记录最新数据到日志里
+		try {
+			LATEST_DAY_DATA_LOGGER.info(mapper.writeValueAsString(stockDataLatest));
+		} catch (JsonProcessingException e) {
+			LOGGER.error("", e);
+		}
 
 
 		//先保存股票信息
@@ -86,8 +100,7 @@ public class StockDataLatestService {
 	@Transactional
 	public void add(List<StockDataLatest> stockDataLatestList){
 		for(StockDataLatest stockDataLatest:stockDataLatestList){
-			//stockDataLatest.setId(IDGenerator.get());
-			stockDataLatestDao.persist(stockDataLatest);
+			this.add(stockDataLatest);
 		}
 		
 	}
