@@ -1,7 +1,7 @@
-package com.kingzoo.kingcat.project.olanalysis.daydata;
+package com.kingzoo.kingcat.project.olanalysis.daydata.storm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kingzoo.kingcat.project.olanalysis.StockDayData;
+import com.kingzoo.kingcat.project.olanalysis.daydata.domain.StockDayData;
 import org.apache.storm.kafka.StringScheme;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Values;
@@ -45,7 +45,7 @@ public class StockDayDataScheme extends StringScheme {
     }
 
     public Fields getOutputFields() {
-//        return new Fields(SCHEME_KEY);
-        return new Fields("default");
+        return new Fields(SCHEME_KEY);
+//        return new Fields("default");
     }
 }

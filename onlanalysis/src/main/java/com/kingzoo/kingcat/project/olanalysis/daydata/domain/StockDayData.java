@@ -1,10 +1,11 @@
-package com.kingzoo.kingcat.project.olanalysis;
+package com.kingzoo.kingcat.project.olanalysis.daydata.domain;
 
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class StockDayData implements Serializable{
 
@@ -284,5 +285,6 @@ public class StockDayData implements Serializable{
 	public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-    
+
+
 }

@@ -1,6 +1,6 @@
-package com.kingzoo.kingcat.project.olanalysis.daydata;
+package com.kingzoo.kingcat.project.olanalysis.daydata.storm;
 
-import com.kingzoo.kingcat.project.olanalysis.StockDayData;
+import com.kingzoo.kingcat.project.olanalysis.daydata.domain.StockDayData;
 import org.apache.storm.generated.GlobalStreamId;
 import org.apache.storm.grouping.CustomStreamGrouping;
 import org.apache.storm.task.WorkerTopologyContext;
