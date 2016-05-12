@@ -11,19 +11,15 @@ public class StockDayData implements Serializable{
 
 
 	/**code+date*/
-    
     private String id;
 
 
-    
     private String code;
     
 
-    
     private String dataDate;
     
-    
-    
+
     private String name;
 
 	/**单位:分*/

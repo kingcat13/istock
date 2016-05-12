@@ -88,9 +88,10 @@ public class StockDayDataKafkaReader {
 
     public static void main(String[] args) throws InterruptedException, InvalidTopologyException, AuthorizationException, AlreadyAliveException {
 
-        String zks = "10.0.20.89:2181,10.0.20.91:2181";
+        //这个zookeeper地址,用于标记从哪里获取kafka信息
+        String zks = "10.0.20.249:2181";
         String topic = "istock";
-        String zkRoot = "/olanalysis";
+        String zkRoot = "/istock/olanalysis";
 
         String id = "stock_day_data";
 
@@ -98,7 +99,9 @@ public class StockDayDataKafkaReader {
         SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, topic, zkRoot, id);
         //解析kafka中的数据
         spoutConfig.scheme = new SchemeAsMultiScheme(new StockDayDataScheme());
-        spoutConfig.zkServers = Arrays.asList(new String[]{"10.0.20.89", "10.0.20.91"});
+
+        //这个zookeeper用于标记,当前,已经从kafka里读取了多少记录了
+        spoutConfig.zkServers = Arrays.asList(new String[]{"10.0.20.249"});
         spoutConfig.zkPort = 2181;
         spoutConfig.startOffsetTime = kafka.api.OffsetRequest.EarliestTime();
 
