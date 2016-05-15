@@ -8,6 +8,7 @@ import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichBolt;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
+import org.apache.storm.tuple.Values;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,11 +57,11 @@ public class StockDayDataBolt extends BaseRichBolt {
 
 
                 LOGGER.info("RECV["+(stockDayData.getCode())+"] " + stockList);
-
+                collector.emit(new Values(stockDayData));
                 collector.ack(tuple);
 
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
             }
 
 //            LOGGER.info("RECV["+(++count)+"] " + line);

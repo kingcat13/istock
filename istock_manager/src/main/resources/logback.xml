@@ -7,7 +7,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${appDestination}/${appName}.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${appDestination}/${appName}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<FileNamePattern>${appDestination}/%d{yyyy-MM-dd}/${appName}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
 			<MaxHistory>60</MaxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy
 				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -49,7 +49,7 @@
 	<appender name="LATEST_DAY_DATA_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${appDestination}/${appName}_latest_day_data.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${appDestination}/%d{yyyy-MM-dd}/${appName}_latest_day_data-%d{yyyy-MM-dd}.gz</FileNamePattern>
+			<FileNamePattern>${appDestination}/%d{yyyy-MM-dd}/${appName}_latest_day_data-%d{yyyy-MM-dd}.%i.gz</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy
 					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
