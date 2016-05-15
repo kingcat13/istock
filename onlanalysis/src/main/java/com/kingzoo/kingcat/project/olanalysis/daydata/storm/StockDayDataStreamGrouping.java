@@ -26,11 +26,13 @@ public class StockDayDataStreamGrouping implements CustomStreamGrouping, Seriali
     @Override
     public List<Integer> chooseTasks(int taskId, List<Object> values) {
 
+        int code = 0;
         int size = choices.size();
 
         StockDayData stockDayData = (StockDayData)values.get(0);
-        int code = Integer.parseInt(stockDayData.getCode());
-
+        if(stockDayData!=null) {
+            code = Integer.parseInt(stockDayData.getCode());
+        }
 
         return choices.get(code%size);
 

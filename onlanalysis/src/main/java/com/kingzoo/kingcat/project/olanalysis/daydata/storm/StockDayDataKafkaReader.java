@@ -48,9 +48,12 @@ public class StockDayDataKafkaReader {
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout("kafka-reader", new KafkaSpout(spoutConfig), 1);
         builder.setBolt("word-splitter", new StockDayDataBolt(), 2).customGrouping("kafka-reader",new StockDayDataStreamGrouping());
-//        builder.setBolt("word-splitter", new StockDayDataBolt(), 2).shuffleGrouping("kafka-reader");
+        builder.setBolt("mongo", new StockDayDataHistoryCountBolt("mongodb://10.0.20.249/istock","istock")).customGrouping("word-splitter",new StockDayDataStreamGrouping());
 
+//        builder.setBolt("word-splitter", new StockDayDataBolt(), 2).shuffleGrouping("kafka-reader");
 //        builder.setBolt("word-counter", new WordCounter()).fieldsGrouping("word-splitter", new Fields("word"));
+
+
 
         Config conf = new Config();
 
@@ -74,7 +77,6 @@ public class StockDayDataKafkaReader {
 //            cluster.shutdown();
 
         }
-
 
     }
 }

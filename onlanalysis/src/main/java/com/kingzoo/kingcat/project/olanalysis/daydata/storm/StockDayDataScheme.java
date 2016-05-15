@@ -29,7 +29,7 @@ public class StockDayDataScheme extends StringScheme {
         StockDayData stockDayData = null;
         try {
             stockDayData = mapper.readValue(deserializeString(bytes), StockDayData.class);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return stockDayData;
