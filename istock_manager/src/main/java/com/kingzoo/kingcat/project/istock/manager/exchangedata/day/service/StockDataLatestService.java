@@ -55,6 +55,12 @@ public class StockDataLatestService {
 	
 	@Transactional
 	public void add(StockDataLatest stockDataLatest){
+		/*
+		 * 1.记录日交易数据到日志文件
+		 * 2.保存股票信息的(判断是否是新上市股票)
+		 * 3.保存数据至最新数据表
+		 * 4.保存数据至历史数据表
+		 */
 
 		//记录最新数据到日志里
 		try {
@@ -62,7 +68,6 @@ public class StockDataLatestService {
 		} catch (JsonProcessingException e) {
 			LOGGER.error("", e);
 		}
-
 
 		//先保存股票信息
 		Stock stock = stockService.get(stockDataLatest.getCode());
