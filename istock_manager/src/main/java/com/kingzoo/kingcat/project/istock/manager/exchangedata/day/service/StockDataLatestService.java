@@ -190,7 +190,7 @@ public class StockDataLatestService {
 		if(count==0){
 			notificationService.sendToOne("kingcat", date+" 数据未下载", date+" 的数据未下载, 请及时下载");
 		}else{
-			notificationService.sendToOne("kingcat", date+" 已下载数据", date+" 已下载数据:" + count);
+			notificationService.sendToOne("kingcat", date+" : "+count, date+" 已下载数据:" + count);
 		}
 
 	}
