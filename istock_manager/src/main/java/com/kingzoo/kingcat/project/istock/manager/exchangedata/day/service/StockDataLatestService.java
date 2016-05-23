@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -178,6 +180,13 @@ public class StockDataLatestService {
 	 * @return
      */
 	public void checkLatestData(){
+		String localIp = "";
+		try {
+			InetAddress ia = InetAddress.getLocalHost();
+			localIp=ia.getHostAddress();
+		} catch (UnknownHostException e) {
+			LOGGER.error("", e);
+		}
 
 		/*
 		 * 1.判断当天的是否有下载数据
@@ -188,9 +197,9 @@ public class StockDataLatestService {
 		long count = stockDataLatestDao.countLatestData(date);
 
 		if(count==0){
-			notificationService.sendToOne("kingcat", date+" 数据未下载", date+" 的数据未下载, 请及时下载");
+			notificationService.sendToOne("kingcat", localIp+":"+date, date+" 的数据未下载, 请及时下载");
 		}else{
-			notificationService.sendToOne("kingcat", date+" : "+count, date+" 已下载数据:" + count);
+			notificationService.sendToOne("kingcat", localIp+":"+date, date+" 已下载数据:" + count);
 		}
 
 	}
