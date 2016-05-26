@@ -1,5 +1,6 @@
 package com.kingzoo.kingcat.project.olanalysis.daydata.storm;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.StormSubmitter;
@@ -22,13 +23,17 @@ import java.util.Arrays;
  */
 public class StockDayDataKafkaReader {
 
+    @JsonInclude
     private static final Logger LOGGER = LoggerFactory.getLogger(StockDayDataKafkaReader.class);
 
 
     public static void main(String[] args) throws InterruptedException, InvalidTopologyException, AuthorizationException, AlreadyAliveException {
 
+        String zookeeperIp = "10.0.20.249";
+        String zookeeperPort = "2181";
+
         //这个zookeeper地址,用于标记从哪里获取kafka信息
-        String zks = "10.0.20.249:2181";
+        String zks = zookeeperIp+":"+zookeeperPort;
         String topic = "istock";
         String zkRoot = "/istock/olanalysis";
 
@@ -40,19 +45,19 @@ public class StockDayDataKafkaReader {
         spoutConfig.scheme = new SchemeAsMultiScheme(new StockDayDataScheme());
 
         //这个zookeeper用于标记,当前,已经从kafka里读取了多少记录了
-        spoutConfig.zkServers = Arrays.asList(new String[]{"10.0.20.249"});
+        spoutConfig.zkServers = Arrays.asList(new String[]{zookeeperIp});
         spoutConfig.zkPort = 2181;
         spoutConfig.startOffsetTime = kafka.api.OffsetRequest.EarliestTime();
 
 
         TopologyBuilder builder = new TopologyBuilder();
+
         builder.setSpout("kafka-reader", new KafkaSpout(spoutConfig), 1);
         builder.setBolt("word-splitter", new StockDayDataBolt(), 2).customGrouping("kafka-reader",new StockDayDataStreamGrouping());
         builder.setBolt("mongo", new StockDayDataHistoryCountBolt("mongodb://10.0.20.249/istock","istock")).customGrouping("word-splitter",new StockDayDataStreamGrouping());
 
 //        builder.setBolt("word-splitter", new StockDayDataBolt(), 2).shuffleGrouping("kafka-reader");
 //        builder.setBolt("word-counter", new WordCounter()).fieldsGrouping("word-splitter", new Fields("word"));
-
 
 
         Config conf = new Config();
