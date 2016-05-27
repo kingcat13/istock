@@ -29,7 +29,7 @@ public class StockDayDataKafkaReader {
 
     public static void main(String[] args) throws InterruptedException, InvalidTopologyException, AuthorizationException, AlreadyAliveException {
 
-        String zookeeperIp = "10.0.20.249";
+        String zookeeperIp = "127.0.0.1";
         String zookeeperPort = "2181";
 
         //这个zookeeper地址,用于标记从哪里获取kafka信息
@@ -53,10 +53,11 @@ public class StockDayDataKafkaReader {
         TopologyBuilder builder = new TopologyBuilder();
 
         builder.setSpout("kafka-reader", new KafkaSpout(spoutConfig), 1);
-        builder.setBolt("word-splitter", new StockDayDataBolt(), 2).customGrouping("kafka-reader",new StockDayDataStreamGrouping());
-        builder.setBolt("mongo", new StockDayDataHistoryCountBolt("mongodb://10.0.20.249/istock","istock")).customGrouping("word-splitter",new StockDayDataStreamGrouping());
+        builder.setBolt("word-splitter", new StockDayDataBolt(), 2).customGrouping("kafka-reader", new StockDayDataStreamGrouping());
+        builder.setBolt("mongo", new StockDayDataHistoryCountBolt("mongodb://127.0.0.1/istock","istock")).customGrouping("word-splitter", new StockDayDataStreamGrouping());
 
-//        builder.setBolt("word-splitter", new StockDayDataBolt(), 2).shuffleGrouping("kafka-reader");
+//
+//      builder.setBolt("word-splitter", new StockDayDataBolt(), 2).shuffleGrouping("kafka-reader");
 //        builder.setBolt("word-counter", new WordCounter()).fieldsGrouping("word-splitter", new Fields("word"));
 
 
