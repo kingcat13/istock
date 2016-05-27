@@ -181,12 +181,7 @@ public class StockDataLatestService {
      */
 	public void checkLatestData(){
 		String localIp = getLocalIp();
-		try {
-			InetAddress ia = InetAddress.getLocalHost();
-			localIp = ia.getHostAddress();
-		} catch (UnknownHostException e) {
-			LOGGER.error("", e);
-		}
+
 
 		/*
 		 * 1.判断当天的是否有下载数据
