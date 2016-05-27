@@ -21,12 +21,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service("stockDataLatestService")
 public class StockDataLatestService {
@@ -170,6 +169,7 @@ public class StockDataLatestService {
 	
 	@Transactional(readOnly=true)
 	public StockDataLatest find(Long id){
+
 		StockDataLatest stockDataLatest = stockDataLatestDao.find(id);
 
 		return stockDataLatest;
@@ -180,10 +180,10 @@ public class StockDataLatestService {
 	 * @return
      */
 	public void checkLatestData(){
-		String localIp = "";
+		String localIp = getLocalIp();
 		try {
 			InetAddress ia = InetAddress.getLocalHost();
-			localIp=ia.getHostAddress();
+			localIp = ia.getHostAddress();
 		} catch (UnknownHostException e) {
 			LOGGER.error("", e);
 		}
@@ -201,6 +201,41 @@ public class StockDataLatestService {
 		}else{
 			notificationService.sendToOne("kingcat", localIp+":"+date, date+" 已下载数据:" + count);
 		}
+
+	}
+
+	private String getLocalIp(){
+
+		String localIp = "--";
+		try {
+			Enumeration allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+			InetAddress ip = null;
+			while (allNetInterfaces.hasMoreElements())
+			{
+				NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+
+				Enumeration addresses = netInterface.getInetAddresses();
+				while (addresses.hasMoreElements())
+				{
+					ip = (InetAddress) addresses.nextElement();
+					if (ip != null && ip instanceof Inet4Address)
+					{
+						if (!"127.0.0.1".equals(ip.getHostAddress())) {
+
+							localIp = ip.getHostAddress()+"";
+							return localIp;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error("", e);
+		}
+
+		return localIp;
+	}
+
+	public static void main(String[] args){
 
 	}
 }
