@@ -3,8 +3,7 @@
 	<property name="appDestination" value="${log.appDestination}" />
     <property name="appName" value="istock" />
 	
-	<appender name="FILE"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${appDestination}/${appName}.log</File>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>${appDestination}/%d{yyyy-MM-dd}/${appName}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
