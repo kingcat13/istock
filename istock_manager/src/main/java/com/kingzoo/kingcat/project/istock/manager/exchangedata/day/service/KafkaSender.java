@@ -90,7 +90,7 @@ public class KafkaSender {
 
 	public static void main(String[] args) {
 
-		String stockJson = "{\"id\":\"600798-2016-05-23\",\"version\":null,\"code\":\"600798\",\"dataDate\":\"2016-05-23\",\"name\":\"宁波海运\",\"zuoshou\":\"477\",\"kaipanjia\":\"476\",\"shoupanjia\":\"525\",\"zuigaojia\":\"525\",\"zuidijia\":\"476\",\"zongjine\":\"18308\",\"zhangdiezhi\":\"48\",\"zhangdiefu\":\"1006\",\"junjia\":\"507\",\"zongshou\":\"360815\",\"weibi\":\"10000\",\"weicha\":\"100\",\"zhangsu\":\"0\",\"huanshou\":\"350\",\"zongguben\":\"1030850944\",\"liangbi\":\"391\",\"zhenfu\":\"1027\"}";
+		String stockJson = "{\"id\":\"000001-2016-05-23\",\"version\":null,\"code\":\"000001\",\"dataDate\":\"2016-05-23\",\"name\":\"平安银行\",\"zuoshou\":\"1030\",\"kaipanjia\":\"1033\",\"shoupanjia\":\"1028\",\"zuigaojia\":\"1034\",\"zuidijia\":\"1025\",\"zongjine\":\"33330\",\"zhangdiezhi\":\"-2\",\"zhangdiefu\":\"-19\",\"junjia\":\"1030\",\"zongshou\":\"323646\",\"weibi\":\"-1291\",\"weicha\":\"-12\",\"zhangsu\":\"10\",\"huanshou\":\"27\",\"zongguben\":\"-692251648\",\"liangbi\":\"117\",\"zhenfu\":\"87\"}";
 		KafkaSender kafkaSender = new KafkaSender("istock", "127.0.0.1:2181", "127.0.0.1:9093");// 使用kafka集群中创建好的主题 test
 
 		kafkaSender.producer.send(new KeyedMessage<Integer, String>("istock", stockJson));

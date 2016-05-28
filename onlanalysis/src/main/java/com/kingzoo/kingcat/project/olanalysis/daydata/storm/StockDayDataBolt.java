@@ -1,7 +1,7 @@
 package com.kingzoo.kingcat.project.olanalysis.daydata.storm;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kingzoo.kingcat.project.olanalysis.daydata.domain.StockDayData;
+
+import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataDay;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -43,7 +43,7 @@ public class StockDayDataBolt extends BaseRichBolt {
 
 
             try {
-                StockDayData stockDayData = (StockDayData)tuple.getValue(0);
+                StockDataDay stockDayData = (StockDataDay)tuple.getValue(0);
 //                StockDayData stockDayData = mapper.readValue(line, StockDayData.class);
 
                 List<String> stockList = this.stockMap.get(stockDayData.getCode());

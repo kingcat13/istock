@@ -1,6 +1,7 @@
 package com.kingzoo.kingcat.project.olanalysis.daydata.storm;
 
-import com.kingzoo.kingcat.project.olanalysis.daydata.domain.StockDayData;
+import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataDay;
+
 import org.apache.storm.generated.GlobalStreamId;
 import org.apache.storm.grouping.CustomStreamGrouping;
 import org.apache.storm.task.WorkerTopologyContext;
@@ -29,7 +30,7 @@ public class StockDayDataStreamGrouping implements CustomStreamGrouping, Seriali
         int code = 0;
         int size = choices.size();
 
-        StockDayData stockDayData = (StockDayData)values.get(0);
+        StockDataDay stockDayData = (StockDataDay)values.get(0);
         if(stockDayData!=null) {
             code = Integer.parseInt(stockDayData.getCode());
         }

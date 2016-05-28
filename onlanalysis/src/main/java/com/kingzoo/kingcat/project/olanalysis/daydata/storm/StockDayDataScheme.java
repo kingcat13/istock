@@ -1,13 +1,12 @@
 package com.kingzoo.kingcat.project.olanalysis.daydata.storm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kingzoo.kingcat.project.olanalysis.daydata.domain.StockDayData;
+import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataDay;
 import org.apache.storm.kafka.StringScheme;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.Utils;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -25,10 +24,10 @@ public class StockDayDataScheme extends StringScheme {
         return new Values(deserializeStockDayData(bytes));
     }
 
-    public static StockDayData deserializeStockDayData(ByteBuffer bytes){
-        StockDayData stockDayData = null;
+    public static StockDataDay deserializeStockDayData(ByteBuffer bytes){
+        StockDataDay stockDayData = null;
         try {
-            stockDayData = mapper.readValue(deserializeString(bytes), StockDayData.class);
+            stockDayData = mapper.readValue(deserializeString(bytes), StockDataDay.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

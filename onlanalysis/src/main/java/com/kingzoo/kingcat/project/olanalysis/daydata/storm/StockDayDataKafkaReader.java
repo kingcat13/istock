@@ -54,7 +54,7 @@ public class StockDayDataKafkaReader {
 
         builder.setSpout("kafka-reader", new KafkaSpout(spoutConfig), 1);
         builder.setBolt("word-splitter", new StockDayDataBolt(), 2).customGrouping("kafka-reader", new StockDayDataStreamGrouping());
-        builder.setBolt("mongo", new StockDayDataHistoryCountBolt("mongodb://127.0.0.1/istock","istock")).customGrouping("word-splitter", new StockDayDataStreamGrouping());
+        builder.setBolt("mongo", new StockDayDataHistoryCountBolt2("mongodb://127.0.0.1/istock","stock_data_day")).customGrouping("word-splitter", new StockDayDataStreamGrouping());
 
 //
 //      builder.setBolt("word-splitter", new StockDayDataBolt(), 2).shuffleGrouping("kafka-reader");

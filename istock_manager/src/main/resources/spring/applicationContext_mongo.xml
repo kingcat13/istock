@@ -21,6 +21,7 @@
 	
 	<!--<mongo:repositories base-package="com.kingzoo.*.dao"/>-->
 
+	<!--配置不保存_class-->
 	<bean id="defaultMongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
 		<constructor-arg name="typeKey"><null/></constructor-arg>
 	</bean>

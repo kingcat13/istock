@@ -1,17 +1,20 @@
-package com.kingzoo.kingcat.project.olanalysis.daydata.domain;
+package com.kingzoo.kingcat.project.istock.core.dataday.domain;
 
 
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.UUID;
 
-public class StockDayData implements Serializable{
+@Entity(noClassnameStored = true, value = "stock_data_day")
+public class StockDataDay implements Serializable{
 
 
 
 	/**code+date*/
+	@Id
     private String id;
 
 
