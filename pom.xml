@@ -37,7 +37,6 @@
                     <value>dev</value>
                 </property>
             </activation>
-
         </profile>
         <profile>
             <id>production</id>
