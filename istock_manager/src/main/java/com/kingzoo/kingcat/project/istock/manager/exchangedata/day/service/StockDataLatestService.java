@@ -9,14 +9,17 @@ import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataDay;
 import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataLatest;
 import com.kingzoo.kingcat.project.istock.core.stock.domain.Stock;
 import com.kingzoo.kingcat.project.istock.core.stock.service.StockService;
+import com.kingzoo.kingcat.project.istock.manager.exchangedata.day.domain.StockDataCount;
 import com.kingzoo.kingcat.project.istock.notification.service.NotificationService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +27,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.UnknownHostException;
 import java.util.*;
 
 @Service("stockDataLatestService")
@@ -45,6 +47,9 @@ public class StockDataLatestService {
 	@Autowired
 	@Qualifier(value="stockService")
 	private StockService stockService;
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
 
 	@Autowired
@@ -175,11 +180,15 @@ public class StockDataLatestService {
 		return stockDataLatest;
 	}
 
+
 	/**
 	 * 判断当天的股票处理数据是否已经下载完成
 	 * @return
      */
 	public void checkLatestData(){
+
+		cleanData();
+
 		String localIp = getLocalIp();
 
 
@@ -196,7 +205,25 @@ public class StockDataLatestService {
 		}else{
 			notificationService.sendToOne("kingcat", localIp+":"+date, date+" 已下载数据:" + count);
 		}
+	}
 
+	/**
+	 * 清理数据,只保留当前还在上市的股票的数据
+	 * 当某只股票退市后,可能会出现其数据在存在最新数据中的情况
+	 */
+	private void cleanData(){
+		List<StockDataCount> stockDataCountList = stockDataLatestDao.countData();
+
+		long max = 0;
+		String maxDate = "";
+		for(StockDataCount count : stockDataCountList){
+			max = count.getCount() > max?count.getCount():max;
+			maxDate = count.getDataDate();
+		}
+
+		Query query = new Query();
+		query.addCriteria(Criteria.where("dataDate").ne(maxDate));
+		mongoTemplate.remove(query, StockDataLatest.class);
 	}
 
 	private String getLocalIp(){
@@ -230,7 +257,5 @@ public class StockDataLatestService {
 		return localIp;
 	}
 
-	public static void main(String[] args){
 
-	}
 }
