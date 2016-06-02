@@ -217,8 +217,10 @@ public class StockDataLatestService {
 		long max = 0;
 		String maxDate = "";
 		for(StockDataCount count : stockDataCountList){
-			max = count.getCount() > max?count.getCount():max;
-			maxDate = count.getDataDate();
+			if(count.getCount() > max) {
+				max = count.getCount() ;
+				maxDate = count.getDataDate();
+			}
 		}
 
 		Query query = new Query();
