@@ -5,6 +5,8 @@ import com.kingzoo.kingcat.project.istock.core.dataday.dao.IStockDataLatestDao;
 import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataLatest;
 import com.kingzoo.kingcat.project.istock.manager.exchangedata.day.domain.StockDataCount;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,7 +22,6 @@ import java.util.List;
  */
 @Repository("stockDataLatestDao")
 public class StockDataLatestDao extends MongoBaseDao2<StockDataLatest> implements IStockDataLatestDao {
-
 
 
     @Override
@@ -55,7 +56,7 @@ public class StockDataLatestDao extends MongoBaseDao2<StockDataLatest> implement
 
         List<StockDataCount> results = new ArrayList<>();
 
-        GroupByResults<StockDataCount> groupByResults = mongoTemplate.group("stock_data_latest",
+        GroupByResults<StockDataCount> groupByResults = mongoOperations.group("stock_data_latest",
                 GroupBy.key("dataDate")
                         .initialDocument("{ count: 0 }")
                         .reduceFunction("function(doc, prev) { prev.count += 1 }"),
