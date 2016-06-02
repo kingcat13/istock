@@ -1,19 +1,27 @@
-package com.shepherd.data.stockDataDay.entity;
+package com.kingzoo.kingcat.project.dataTransfer2.shepherd;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * 股票日数据 实体
  * 
  * @author an hao 2016-4-1 下午3:47:29
  */
+@Entity
+@Table(name = "stock_data_day")
+@NamedQuery(name="ShepherdStockDataDay.withStockCodeQuery",query="select o from ShepherdStockDataDay o where o.stockCode=?1")
 public class ShepherdStockDataDay implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
     private Long              id;                   // 主键
 
     private String            stockCode;            // 股票编码
@@ -195,4 +203,9 @@ public class ShepherdStockDataDay implements Serializable {
     public void setStockType(Long stockType) {
         this.stockType = stockType;
     }
+
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
 }
