@@ -12,23 +12,15 @@ public class Stock {
     //@Version
     private Integer version;
 
-
     @Id
     private String code;
-    
-    
-    
+
     private String name;
-    
-    
-    
+
     private String goPublicDate;
-    
-    
-    
+
     private String stockExchange;
 
-    
     private String lastDataDay;
     
     
