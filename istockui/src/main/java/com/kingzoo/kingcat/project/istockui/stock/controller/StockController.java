@@ -1,7 +1,7 @@
-package com.kingzoo.kingcat.project.istockui.core.stock.controller;
+package com.kingzoo.kingcat.project.istockui.stock.controller;
 
-import com.kingzoo.kingcat.project.istockui.core.stock.domain.Stock;
-import com.kingzoo.kingcat.project.istockui.core.stock.service.StockService;
+import com.kingzoo.kingcat.project.istockui.stock.domain.Stock;
+import com.kingzoo.kingcat.project.istockui.stock.service.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

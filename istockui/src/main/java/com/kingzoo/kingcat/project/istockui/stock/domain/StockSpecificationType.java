@@ -1,4 +1,4 @@
-package com.kingzoo.kingcat.project.istockui.core.stock.domain;
+package com.kingzoo.kingcat.project.istockui.stock.domain;
 
 /**
  * Created by gonghongrui on 14/12/11.

@@ -1,4 +1,4 @@
-package com.kingzoo.kingcat.project.istockui.core.stock.domain;
+package com.kingzoo.kingcat.project.istockui.stock.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

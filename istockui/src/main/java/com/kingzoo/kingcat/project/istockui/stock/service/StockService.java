@@ -1,12 +1,11 @@
-package com.kingzoo.kingcat.project.istockui.core.stock.service;
+package com.kingzoo.kingcat.project.istockui.stock.service;
 
 
-import com.kingzoo.kingcat.project.istockui.core.stock.dao.IStockDao;
-import com.kingzoo.kingcat.project.istockui.core.stock.domain.Stock;
+import com.kingzoo.kingcat.project.istockui.stock.dao.StockRepository;
+import com.kingzoo.kingcat.project.istockui.stock.domain.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,14 +25,14 @@ public class StockService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(StockService.class);
 
 	@Autowired
-	private IStockDao stockDao;
+	private StockRepository stockRepository;
 
 
 	@Transactional
 	public void delete(Stock stock){
 		List<Stock> stockList = this.findAll(stock, null);
 		for(Stock tempStock:stockList){
-			stockDao.delete(tempStock.getCode());
+			stockRepository.delete(tempStock.getCode());
 		}
 	}
 
@@ -42,7 +40,7 @@ public class StockService {
 	@CacheEvict(value = "default", key = "id")
 	public void delete(String id){
 
-		stockDao.delete(id);
+		stockRepository.delete(id);
 	}
 
 	@Transactional
@@ -55,13 +53,13 @@ public class StockService {
 	@Transactional
 	@CachePut(value = "default", key = "#stock.getCode()")
 	public void meger(Stock stock){
-		stockDao.save(stock);
+		stockRepository.save(stock);
 	}
 
 	@Transactional
 	public void meger(List<Stock> stockList){
 		for(Stock stock:stockList){
-			stockDao.save(stock);
+			stockRepository.save(stock);
 		}
 
 	}
@@ -69,34 +67,33 @@ public class StockService {
 	@Transactional(readOnly=true)
 	public List<Stock> findAll(Stock stock, Sort sort){
 
-		List<Stock> stockList = stockDao.find(stock, sort);
+		List<Stock> stockList = stockRepository.find(stock, sort);
 
 		return stockList;
 	}
 
 	@Transactional(readOnly=true)
-	public Page<Stock> find(int start, int limit, Stock stock, List<Order> sortConditions){
+	public Page<Stock> find(int start, int limit, Stock stock, Sort sort){
 
 		int page = start % limit;
-		Sort sort = new Sort(sortConditions);
 
 		Pageable pageRequest = new PageRequest(page, limit, sort);
 
 
-		Page<Stock> stockList = stockDao.find(stock, pageRequest);
-		return stockList;
+		Page<Stock> stockPage = stockRepository.find(stock, pageRequest);
+		return stockPage;
 	}
 
 	@Transactional(readOnly=true)
 	public long count(Stock stock){
-		long count = stockDao.count();
+		long count = stockRepository.count();
 		return count;
 	}
 
 	@Transactional(readOnly=true)
 	@Cacheable(value = "default")
 	public Stock get(String id){
-		Stock stock = stockDao.findOne(id);
+		Stock stock = stockRepository.findOne(id);
 
 		return stock;
 	}

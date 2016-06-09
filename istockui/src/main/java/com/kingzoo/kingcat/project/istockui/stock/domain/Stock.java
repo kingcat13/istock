@@ -1,4 +1,4 @@
-package com.kingzoo.kingcat.project.istockui.core.stock.domain;
+package com.kingzoo.kingcat.project.istockui.stock.domain;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
