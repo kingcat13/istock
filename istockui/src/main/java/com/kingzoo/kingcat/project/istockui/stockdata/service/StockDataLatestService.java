@@ -35,11 +35,11 @@ import java.util.*;
 public class StockDataLatestService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(StockDataLatestService.class);
+
 	private static final Logger LATEST_DAY_DATA_LOGGER = LoggerFactory.getLogger("com.kingzoo.kingcat.project.istock.manager.exchangedata.day.latest");
 	
 	@Autowired
 	private StockDataLatestRepository stockDataLatestRepository;
-
 
     @Autowired
     private StockDataDayRepository stockDataDayRepository;

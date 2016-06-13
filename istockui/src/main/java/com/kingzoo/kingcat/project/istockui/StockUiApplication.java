@@ -17,7 +17,7 @@ public class StockUiApplication {
 
 
 
-	@RequestMapping(value = "/{page}")
+//	@RequestMapping(value = "/{page}")
 	public String toPage(@PathVariable String page){
 		return page;
 

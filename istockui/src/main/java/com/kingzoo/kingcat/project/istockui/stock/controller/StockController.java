@@ -18,7 +18,7 @@ import java.util.List;
  * Created by gonghongrui on 16/6/6.
  */
 @RestController
-@RequestMapping(value = "/stock")
+@RequestMapping(value = "/rest/stock")
 public class StockController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(StockController.class);

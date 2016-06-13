@@ -2,8 +2,8 @@ package com.kingzoo.kingcat.project.istockui.notification.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataDay;
-import com.kingzoo.kingcat.project.istock.core.dataday.domain.StockDataLatest;
+import com.kingzoo.kingcat.project.istockui.stockdata.domain.StockDataDay;
+import com.kingzoo.kingcat.project.istockui.stockdata.domain.StockDataLatest;
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;

@@ -1,8 +1,5 @@
 package com.kingzoo.kingcat.project.istockui.stockdata.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.kingzoo.kingcat.project.istockui.stock.domain.Stock;
 import com.kingzoo.kingcat.project.istockui.stockdata.domain.StockDataLatest;
 import com.kingzoo.kingcat.project.istockui.stockdata.service.StockDataLatestService;
 import org.slf4j.Logger;
@@ -13,14 +10,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
@@ -32,8 +24,6 @@ public class StockDataLatestController {
 	@Autowired
 	private StockDataLatestService stockDataLatestService;
 
-	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create()  ;
-	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<StockDataLatest> add(@RequestBody StockDataLatest stockDataLatest, UriComponentsBuilder ucBuilder){
 		
@@ -99,14 +89,12 @@ public class StockDataLatestController {
 			@RequestParam(required=false, value="sort.order") String orderBy,
 			@RequestParam(required=false, value="sort.direction", defaultValue = "ASC") String direction,
 			@RequestParam(required=false, value="condition") String condition
-			) throws UnsupportedEncodingException {
+			) {
 
         LOGGER.debug(condition);
 		
 		StockDataLatest stockDataLatestCondition = null;
-		if(condition!=null){
-			stockDataLatestCondition = gson.fromJson(condition, StockDataLatest.class);
-		}
+
 		Sort sort = null;
 		if(!StringUtils.isEmpty(orderBy)){
 			Sort.Order order = new Sort.Order(Sort.Direction.fromStringOrNull(direction), orderBy);
