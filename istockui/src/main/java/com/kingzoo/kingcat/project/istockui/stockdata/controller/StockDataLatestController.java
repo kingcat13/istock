@@ -1,5 +1,6 @@
 package com.kingzoo.kingcat.project.istockui.stockdata.controller;
 
+
 import com.kingzoo.kingcat.project.istockui.stockdata.domain.StockDataLatest;
 import com.kingzoo.kingcat.project.istockui.stockdata.service.StockDataLatestService;
 import org.slf4j.Logger;
@@ -84,6 +85,7 @@ public class StockDataLatestController {
 
 	@RequestMapping(value = "/")
 	public ResponseEntity<Page<StockDataLatest>> list(
+			@RequestParam(required=false, value="page") Integer page,
 			@RequestParam(required=false, value="start", defaultValue="0") Integer start,
 			@RequestParam(required=false, value="limit", defaultValue="25") Integer limit,
 			@RequestParam(required=false, value="sort.order") String orderBy,
@@ -95,16 +97,21 @@ public class StockDataLatestController {
 		
 		StockDataLatest stockDataLatestCondition = null;
 
+
+
 		Sort sort = null;
 		if(!StringUtils.isEmpty(orderBy)){
 			Sort.Order order = new Sort.Order(Sort.Direction.fromStringOrNull(direction), orderBy);
 			sort = new Sort(order);
 		}
 
-		
-		Page<StockDataLatest> stockDataLatestPage = stockDataLatestService.find(start, limit, stockDataLatestCondition, sort);
-		LOGGER.debug(stockDataLatestPage.toString());
+		if(page!=null){
+			start = (page - 1 )*limit;
+		}
 
+		Page<StockDataLatest> stockDataLatestPage = stockDataLatestService.find(start, limit, stockDataLatestCondition, sort);
+
+		LOGGER.debug(stockDataLatestPage.toString());
 
 		ResponseEntity<Page<StockDataLatest>> responseEntity = new ResponseEntity<>(stockDataLatestPage, HttpStatus.OK);
 		

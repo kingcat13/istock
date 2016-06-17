@@ -38,32 +38,8 @@
 	ace.load_ajax_scripts(scripts, function() {
 	  //inline scripts related to this page
 		jQuery(function($) {
-			var grid_data =
-					[
-						{id:"1",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-						{id:"2",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-						{id:"3",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-						{id:"4",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-						{id:"5",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-						{id:"6",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-						{id:"7",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-						{id:"8",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-						{id:"9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-						{id:"10",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-						{id:"11",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-						{id:"12",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-						{id:"13",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-						{id:"14",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-						{id:"15",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-						{id:"16",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-						{id:"17",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-						{id:"18",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-						{id:"19",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-						{id:"20",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-						{id:"21",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-						{id:"22",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-						{id:"23",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
-					];
+
+
 			var grid_selector = "#grid-table";
 			var pager_selector = "#grid-pager";
 
@@ -84,28 +60,79 @@
 
 			jQuery(grid_selector).jqGrid({
 				//direction: "rtl",
-
-				data: grid_data,
-				datatype: "local",
-				height: 500,
+				restful:  true,
+				url:"/stockdataday/latest/",
+				datatype: "json",
+				jsonReader:{id:"id",root:"content", records:'totalElements',total:'totalPages',page:'currentPage'},
+				prmNames:{page:"page",rows:"limit"},
+				height: 421,
+				page:1,
 //				colNames:[' ', 'ID','Last Sales','Name', 'Stock', 'Ship via','Notes'],
 				colModel:[
-					{label:' ', name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
-						formatter:'actions',
-						formatoptions:{
-							keys:true,
-							//delbutton: false,//disable delete button
+//					{label:' ', name:'myac',index:'id', width:80, fixed:true, sortable:false, resize:false,
+//						formatter:'actions',
+//						formatoptions:{
+//							keys:true,
+//							//delbutton: false,//disable delete button
+//							editOptions: {
+//								url: "/stockdataday/latest/",
+//								mtype:'PUT',
+//								ajaxEditOptions: {
+//									url: "/stockdataday/latest/",
+//									contentType: 'application/json;charset=utf-8',
+//									type: 'PUT',
+//									datatype: 'json'
+//								}
+//							},
+//
+//							delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback}
+//							//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+//						}
+//					},
+					{label:'ID', name:'id',index:'id', width:60, sorttype:"int", hidden: true,key:true },
+//					{label:'证券代码', name:'code',index:'code', width:60, sorttype:"int", hidden: true},
+					{label:'证券代码', name:'code',index:'code', width:60, sorttype:"int", editable: true,editoptions : {readonly : true}},
+					{label:'证券名称',name:'name',index:'name',width:90, editable:true},
+					{label:'日期',name:'dataDate',index:'dataDate', width:150, sorttype:"date", editable: true, editoptions:{size:"20",maxlength:"30"}},
+					{label:'收盘价(元)',name:'shoupanjia',index:'shoupanjia', width:70, editable: true, editoptions: {size:"20", maxlength:"10"},
+						formatter:function(cellvalue, options, rowObject) {
+							if(cellvalue>0){
+								return '<p class="text-danger">'+(cellvalue/100)+'</p>'
+							}else{
+								return '<p class="text-success">'+(cellvalue/100)+'</p>'
+							}
+						},
+						unformat:function(cellvalue, options, rowObject) {
 
-							delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
-							//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+							return cellvalue*100+'';
 						}
 					},
-					{label:'ID', name:'id',index:'id', width:60, sorttype:"int", editable: true},
-					{name:'sdate',index:'sdate',width:90, editable:true, sorttype:"date",unformat: pickDate},
-					{name:'name',index:'name', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
-					{name:'stock',index:'stock', width:70, editable: true,edittype:"checkbox",editoptions: {value:"Yes:No"},unformat: aceSwitch},
-					{name:'ship',index:'ship', width:90, editable: true,edittype:"select",editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
-					{name:'note',index:'note', width:150, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}}
+					{label:'涨跌幅(%)',name:'zhangdiezhi',index:'zhangdiezhi', width:90, editable: true,
+						formatter:function(cellvalue, options, rowObject) {
+							if(cellvalue>0){
+								return '<p class="text-danger">'+(cellvalue/100)+'</p>'
+							}else{
+								return '<p class="text-success">'+(cellvalue/100)+'</p>'
+							}
+						},
+						unformat:function(cellvalue, options, rowObject) {
+
+							return cellvalue*100+'';
+						}
+					},
+					{label:'涨跌值(元)',name:'zhangdiefu',index:'zhangdiefu', width:150, sortable:false, editable: true,
+						formatter:function(cellvalue, options, rowObject) {
+							if(cellvalue>0){
+								return '<p class="text-danger">'+(cellvalue/100)+'</p>'
+							}else{
+								return '<p class="text-success">'+(cellvalue/100)+'</p>'
+							}
+						},
+						unformat:function(cellvalue, options, rowObject) {
+
+							return cellvalue*100+'';
+						}
+					}
 				],
 
 				viewrecords : true,
@@ -115,22 +142,21 @@
 				altRows: true,
 				//toppager: true,
 
-				multiselect: true,
+				multiselect: false,
 				//multikey: "ctrlKey",
 				multiboxonly: true,
-
+				closeAfterAdd: true,
+				closeAfterEdit:true,
 				loadComplete : function() {
 					var table = this;
 					setTimeout(function(){
 						styleCheckbox(table);
-
 						updateActionIcons(table);
 						updatePagerIcons(table);
 						enableTooltips(table);
 					}, 0);
 				},
 
-				editurl: "/dummy.html",//nothing is saved
 				caption: "jqGrid with inline editing"
 
 				//,autowidth: true,
@@ -154,7 +180,6 @@
 //enable search/filter toolbar
 			//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
 			//jQuery(grid_selector).filterToolbar({});
-
 
 			//switch element when editing inline
 			function aceSwitch( cellvalue, options, cell ) {
@@ -193,16 +218,31 @@
 						//edit record form
 						//closeAfterEdit: true,
 						//width: 700,
+						url: "/stockdataday/latest",
+						mtype:'PUT',
+						ajaxEditOptions: { contentType: "application/json" },
 						recreateForm: true,
+						closeAfterEdit:true,
 						beforeShowForm : function(e) {
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
+						},
+
+						serializeEditData: function (data) {
+							return JSON.stringify(data);
+						},
+						onclickSubmit: function (params, postdata) {
+
+							params.url = '/stockdataday/latest/' + encodeURIComponent(postdata["grid-table_id"]);
 						}
+
 					},
 					{
 						//new record form
 						//width: 700,
+						url: "/stockdataday/latest",
+						ajaxEditOptions: { contentType: "application/json" },
 						closeAfterAdd: true,
 						recreateForm: true,
 						viewPagerButtons: false,
@@ -210,12 +250,19 @@
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
 									.wrapInner('<div class="widget-header" />')
-							style_edit_form(form);
+							style_add_form(form);
+						},
+						serializeEditData: function (data) {
+							delete data.id;
+							return JSON.stringify(data);
 						}
 					},
 					{
 						//delete record form
 						recreateForm: true,
+						mtype:'DELETE',
+						url: "/stockdataday/latest",
+						ajaxDelOptions: { contentType: "application/json" },
 						beforeShowForm : function(e) {
 							var form = $(e[0]);
 							if(form.data('styled')) return false;
@@ -224,6 +271,14 @@
 							style_delete_form(form);
 
 							form.data('styled', true);
+						},
+						serializeDelData: function (data) {
+
+							return '';
+						},
+						onclickSubmit: function (params, postdata) {
+							alert(JSON.stringify(postdata))
+							params.url = '/stockdataday/latest/' + encodeURIComponent(postdata);
 						},
 						onClick : function(e) {
 							alert(1);
@@ -259,9 +314,31 @@
 
 
 
+			function style_add_form(form) {
+				//enable datepicker on "sdate" field and switches for "stock" field
+				form.find('input[name=dataDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+						.end().find('input[name=stock]')
+						.addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+				//don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
+				//.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
+
+				//新增的时候,该字段可以填写
+				form.find('input[name=code]').removeAttr("readonly");
+
+				//update buttons classes
+				var buttons = form.next().find('.EditButton .fm-button');
+				buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+				buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+				buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+
+				buttons = form.next().find('.navButton a');
+				buttons.find('.ui-icon').hide();
+				buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+				buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
+			}
 			function style_edit_form(form) {
 				//enable datepicker on "sdate" field and switches for "stock" field
-				form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+				form.find('input[name=dataDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
 						.end().find('input[name=stock]')
 						.addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
 				//don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
@@ -385,3 +462,4 @@
 		});
 	});
 </script>
+

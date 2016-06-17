@@ -156,11 +156,18 @@ public class StockDataLatestService {
 		if(sort==null){
 			sort = new Sort(Sort.Direction.ASC, "code");
 		}
-		int page = start % limit;
+		int page = start / limit;
 
 		Pageable pageRequest = new PageRequest(page, limit, sort);
 
 
+
+		Page<StockDataLatest> stockDataLatestList = stockDataLatestRepository.find(stockDataLatest, pageRequest);
+		return stockDataLatestList;
+	}
+
+	@Transactional(readOnly=true)
+	public Page<StockDataLatest> find(Pageable pageRequest, StockDataLatest stockDataLatest){
 
 		Page<StockDataLatest> stockDataLatestList = stockDataLatestRepository.find(stockDataLatest, pageRequest);
 		return stockDataLatestList;

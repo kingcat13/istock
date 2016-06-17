@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by gonghongrui on 16/3/5.
  */
-public class StockDataLatestRepositoryImpl implements CustomStockDataDayRepository {
+public class StockDataLatestRepositoryImpl implements CustomStockDataLatestRepository {
 
 
     @Autowired

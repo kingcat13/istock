@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by gonghongrui on 16/6/7.
  */
-public interface CustomStockDataDayRepository {
+public interface CustomStockDataLatestRepository {
 
 	long countLatestData(String date);
 
