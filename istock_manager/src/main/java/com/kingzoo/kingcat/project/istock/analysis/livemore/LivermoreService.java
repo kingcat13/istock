@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by gonghongrui on 15/8/5.
  */
 @Service("livermoreService")
@@ -87,7 +88,7 @@ public class LivermoreService {
             //如果满足了4个时间点,再进行处理判断，当前是否处于某种趋势中
             if(i < 4) continue;
 
-            //1.上涨达到比率，则上涨趋势确立
+            //1.上涨达到比率,则上涨趋势确立
             if(tempOhlc.getClose() >= (1 + riseTrendFlag/1000) * highestBeforeLowest.getClose()){
                 trend.trendType = Trend.TRENDTYPE_UP;
                 trend.endTime = tempOhlc.getDataTime();
@@ -103,7 +104,7 @@ public class LivermoreService {
                 trend.low = lowest;
                 break;
             }
-            //3.
+            //3.下降达到比率,则下降趋势确立
             if(tempOhlc.getClose() <= (1 - downTrendFlag/1000) * lowestBeforeHighest.getClose()){
                 trend.trendType = Trend.TRENDTYPE_DOWN;
                 trend.endTime = tempOhlc.getDataTime();
