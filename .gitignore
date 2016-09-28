@@ -2,5 +2,6 @@
 /dataTransfer/.mvn
 iStock.iml
 .idea
+logs/*
 istock_manager/istock_manager.iml
 *.iml
