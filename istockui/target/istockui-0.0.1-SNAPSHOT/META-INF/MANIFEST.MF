@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: istockui
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: gonghongrui
+Implementation-Vendor-Id: com.kingzoo.kingcat.project.istock
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.7.0_60
+Main-Class: ${start-class}
+

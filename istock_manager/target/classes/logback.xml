@@ -1,0 +1,78 @@
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+	<property name="appDestination" value="../logs" />
+    <property name="appName" value="istock" />
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${appDestination}/${appName}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${appDestination}/%d{yyyy-MM-dd}/${appName}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<MaxHistory>60</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-  %msg    [%logger{36}]%n </pattern>
+		</encoder>
+	</appender>
+
+    <appender name="zookeeper"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${appDestination}/${appName}_zookeeper.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${appDestination}/${appName}_zookeeper-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxHistory>60</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-  %msg    [%logger{36}]%n </pattern>
+        </encoder>
+    </appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- LATEST_DATA_INFO -->
+	<appender name="LATEST_DAY_DATA_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${appDestination}/${appName}_latest_day_data.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${appDestination}/%d{yyyy-MM-dd}/${appName}_latest_day_data-%d{yyyy-MM-dd}.%i.gz</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 100MB -->
+				<maxFileSize>1024MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+    <logger name="com.kingzoo.kingcat.framework.zookeeper" level="ALL" >
+        <appender name="zookeeper"/>
+    </logger>
+
+	<!--所有请求-->
+	<logger name="com.kingzoo.kingcat.project.istock.manager.exchangedata.day.latest" additivity="TRUE">
+		<level value="INFO"/>
+		<appender-ref ref="LATEST_DAY_DATA_LOG"/>
+	</logger>
+
+	<root level="debug">
+		<appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT"/>
+	</root>
+</configuration>
